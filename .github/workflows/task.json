@@ -1,0 +1,47 @@
+{
+  "taskDefinitionArn": "arn:aws:ecs:eu-west-1:343436760323:task-definition/service:1",
+  "containerDefinitions": [
+    {
+      "name": "first",
+      "image": "service-first",
+      "cpu": 1,
+      "memory": 1024,
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "hostPort": 80,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "environment": [],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "systemControls": []
+    }
+  ],
+  "family": "service",
+  "revision": 1,
+  "volumes": [
+    {
+      "name": "service-storage",
+      "host": {
+        "sourcePath": "/ecs/service-storage"
+      }
+    }
+  ],
+  "status": "ACTIVE",
+  "placementConstraints": [
+    {
+      "type": "memberOf",
+      "expression": "attribute:ecs.availability-zone in [eu-west-1a, eu-west-1b]"
+    }
+  ],
+  "compatibilities": [
+    "EXTERNAL",
+    "EC2"
+  ],
+  "registeredAt": "2024-05-20T14:50:30.849Z",
+  "registeredBy": "arn:aws:iam::343436760323:user/stijn_vet",
+  "tags": []
+}
