@@ -54,4 +54,4 @@ jobs:
 
       - name: EB Deploy
         run: |
-          eb deploy aws
+          eb deploy demo
