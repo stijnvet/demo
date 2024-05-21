@@ -44,6 +44,12 @@ jobs:
       - name: EB Deploy
         uses: sparkplug-app/install-eb-cli-action
 #        uses: bloodyowl/actions-aws-eb@v1.0.3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: "eu-west-1"
+
+      - name: Deploy to Amazon EB
         run: |
           mvn package -DskipTests
           
