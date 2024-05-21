@@ -7,7 +7,7 @@
 # To get a newer version, you will need to update the SHA.
 # You can also reference a tag or branch, but the action may change without warning.
 
-name: Deploy to Amazon ECS
+name: Deploy to Amazon EB
 
 on:
   push:
@@ -43,7 +43,7 @@ jobs:
         run: pip install awsebcli --upgrade --user
 
       - name: Build artifact
-        run: mvn package -DskipTests
+        run: mvn package -DskipTests -ntp
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
@@ -53,4 +53,5 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: EB Deploy
-        run: eb deploy aws
+        run: |
+          eb deploy aws
