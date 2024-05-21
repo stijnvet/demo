@@ -34,6 +34,10 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+      - name: Build artifact
+        run: |
+          mvn package -DskipTests
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
         with:
@@ -42,19 +46,10 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: EB Deploy
-        uses: sparkplug-app/install-eb-cli-action
-#        uses: bloodyowl/actions-aws-eb@v1.0.3
+        uses: bloodyowl/actions-aws-eb@v1.0.3
+        with:
+          command: 'eb deploy ${{ secrets.ENVIRONMENT_NAME }}'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: "eu-west-1"
-
-      - name: Deploy to Amazon EB
-        run: |
-          mvn package -DskipTests
-          
-          eb deploy ${{ secrets.ENVIRONMENT_NAME }}
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: "us-east-1"
