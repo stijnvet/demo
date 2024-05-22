@@ -14,6 +14,11 @@ class DemoApplication {
 	fun greet(): ResponseEntity<String> {
 		return ResponseEntity.ok("Hello, World!")
 	}
+
+	@GetMapping("/kza")
+	fun hiKza(): ResponseEntity<String> {
+		return ResponseEntity.ok("Hi, Kza!")
+	}
 }
 
 fun main(args: Array<String>) {
